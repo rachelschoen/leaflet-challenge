@@ -61,5 +61,11 @@ d3.json(url).then(function (data) {
         },
 
         style: mapStyle,
+
+        // Activate pop-up data when circles are clicked
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place + "<br>Depth: " + feature.geometry.coordinates[2]);
+
+        }
     }).addTo(myMap);
 });
