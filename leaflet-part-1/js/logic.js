@@ -11,3 +11,19 @@ var myMap = L.map("map", {
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
+
+// Retrieve and add the earthquake data to the map
+d3.json(url).then(function (data) {
+    function mapStyle(feature) {
+        return {
+            opacity: 1,
+            fillOpacity: 1,
+            fillColor: mapColor(feature.geometry.coordinates[2]),
+            color: "black",
+            radius: mapRadius(feature.properties.mag),
+            stroke: true,
+            weight: 0.5
+        };
+
+        }
+});
