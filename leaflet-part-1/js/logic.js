@@ -26,4 +26,40 @@ d3.json(url).then(function (data) {
         };
 
         }
+        
+    // Establish colors for depth
+    function mapColor(depth) {
+        switch (true) {
+            case depth > 90:
+                return "red";
+            case depth > 70:
+                return "orangered";
+            case depth > 50:
+                return "orange";
+            case depth > 30:
+                return "gold";
+            case depth > 10:
+                return "yellow";
+            default:
+                return "lightgreen";
+        }
+    }
+    // Establish magnitude size
+    function mapRadius(mag) {
+        if (mag === 0) {
+            return 1;
+        }
+
+        return mag * 4;
+    }
+
+    // Add earthquake data to the map
+    L.geoJson(data, {
+
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng);
+        },
+
+        style: mapStyle,
+    }).addTo(myMap);
 });
